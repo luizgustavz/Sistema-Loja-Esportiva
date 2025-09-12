@@ -1,4 +1,4 @@
-package com.sports_store.sports_store.repository;
+package com.sports_store.sports_store.repository.state;
 
 import com.sports_store.sports_store.domain.state.City;
 import org.springframework.data.jpa.repository.JpaRepository;
