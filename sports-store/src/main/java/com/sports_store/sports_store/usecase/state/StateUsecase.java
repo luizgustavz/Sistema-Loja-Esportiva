@@ -10,6 +10,7 @@ import java.util.List;
 public class StateUsecase {
 
     private final IStateRepository repository;
+
     public StateUsecase(IStateRepository IRepository){
         this.repository = IRepository;
     }
@@ -31,9 +32,9 @@ public class StateUsecase {
     public List<State> findAll(){
         return repository.findAll();
     }
-    
+
     public State patch(Long id, State obj){
-        if (!repository.existsById(id) || id == null){
+        if (!repository.existsById(id)){
             throw new IllegalArgumentException();
         }
         obj.setId(id);
@@ -46,6 +47,4 @@ public class StateUsecase {
         }
         repository.deleteById(id);
     }
-
-
 }

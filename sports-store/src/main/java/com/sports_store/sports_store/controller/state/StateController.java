@@ -1,4 +1,4 @@
-package com.sports_store.sports_store.controller;
+package com.sports_store.sports_store.controller.state;
 
 import com.sports_store.sports_store.domain.state.State;
 import com.sports_store.sports_store.usecase.state.StateUsecase;
@@ -21,32 +21,32 @@ public class StateController {
     }
 
     @Transactional
-    @PostMapping(value = "/s")
+    @PostMapping(value = "/persist")
     public ResponseEntity<State> persist(@RequestBody @Valid State obj){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(usecase.persist(obj));
     }
 
-    @GetMapping(value = "/l/{id}")
+    @GetMapping(value = "/list/{id}")
     public ResponseEntity<State> findById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(usecase.findById(id));
     }
 
-    @GetMapping(value = "/l/n/")
+    @GetMapping(value = "/list/name/")
     public ResponseEntity<State> findByName(@RequestParam String name){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(usecase.findByName(name));
     }
 
-    @GetMapping(value = "/l/")
+    @GetMapping(value = "/list")
     public ResponseEntity<List<State>> findAll(){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(usecase.findAll());
     }
 
     @Transactional
-    @PutMapping(value = "/patch/{id}")
+    @PutMapping(value = "/update/{id}")
     public ResponseEntity<State> patch(@PathVariable @Valid Long id, @RequestBody State obj){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(usecase.patch(id, obj));
