@@ -33,7 +33,7 @@ public class StateController {
                 .body(usecase.findById(id));
     }
 
-    @GetMapping(value = "/l/name/")
+    @GetMapping(value = "/l/n/")
     public ResponseEntity<State> findByName(@RequestParam String name){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(usecase.findByName(name));
