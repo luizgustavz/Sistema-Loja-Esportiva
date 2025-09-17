@@ -3,12 +3,7 @@ import com.sports_store.sports_store.domain.validationMessage.StateMessage;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -49,7 +44,7 @@ public class State {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateAt;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY, targetEntity = City.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<City> cities = new HashSet<>();
 
     public State() {};
@@ -70,7 +65,7 @@ public class State {
 
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()){
-            throw new IllegalArgumentException("Name is required");
+            throw new IllegalArgumentException(StateMessage.REQUIRED_NAME);
         }
         this.name = name.trim();
     }
